@@ -13,6 +13,8 @@ The app has the following key features:
 
 ## Supporting Documents
 
+All documentation is hosted on [Github pages](https://waimea-bsjenner.github.io/level3-project-moving-planner/)
+
 Task Instructions:
 - [Instruction documents](docs/instructions/)
 
