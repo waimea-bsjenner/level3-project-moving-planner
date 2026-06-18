@@ -27,7 +27,7 @@ This implication is relevant because if the app is constantly glitching, then it
 
 ### Impact / Considerations
 
-the project will need to prioritize bug fixing, and stability of the app, so it is functional for extended periods of time.
+The project will need to prioritize bug fixing, and stability of the app, so it is functional for extended periods of time.
 
 
 
@@ -41,17 +41,17 @@ If the end product is hard to use, then it will take significantly longer to use
 
 ### Impact / Considerations
 
-the project will need to be well designed and intuitive, with the use of appropriately colored buttons, links, etc, and have a flow that feels natural to use.
+The project will need to be well designed and intuitive, with the use of appropriately colored buttons, links, etc, icons, and have a flow that feels natural to use.
 
 
 
 ## Accessbility
 
-the end product should be accessible for different devices, and people with different disabilities
+The end product should be accessible for different devices, and people with different disabilities
 
 ### Relevance to the System
 
-to use this app efficiently, it will be needed to be done on a handheld device you can carry with you as you pack up boxes, for example phone, laptop, tablets, as having to go to a desktop back and forth as you enter items will waste significant time.
+To use this app efficiently, it will be needed to be done on a handheld device you can carry with you as you pack up boxes, for example phone, laptop, tablets, as having to go to a desktop back and forth as you enter items will waste significant time.
 
 ### Impact / Considerations
 
@@ -61,7 +61,7 @@ The project will need to be usable for different screen ratios, so I will have t
 
 ## Privacy
 
-the end product should keep data safe from people who shouldn't have access
+The end product should keep data safe from people who shouldn't have access
 
 ### Relevance to the System
 
@@ -69,13 +69,13 @@ If you have people helping you with a move, then its likely they will also be us
 
 ### Impact / Considerations
 
-the project will need to have a way to allow limited access to other users who are simply helping with a move, but aren't signed in
+The project will need to have a way to allow limited access to other users who are simply helping with a move, but aren't signed in
 
 
 
 ## Future proofing
 
-the end product should be usable in a few years time, as it is intended for the use of multiple moves for multiple users
+The end product should be usable in a few years time, as it is intended for the use of multiple moves for multiple users
 
 ### Relevance to the System
 
@@ -83,36 +83,36 @@ If the end user move several times, over however many years, this app should be 
 
 ### Impact / Considerations
 
-the project will need to take long term use into account, including things such as help for remembering passwords, and long term data storage.
+The project will need to take long term use into account, including things such as help for remembering passwords, and long term data storage.
 
 
 
 # User Experience (UX) Principles
 
-## NAME OF UX PRINCIPLE 1
+## Know your user
 
-Replace this text with a clear explanation of what the principle means.
-
-### Relevance to the System
-
-Replace this text with an explanation of why the principle is relevant to this particular project.
-
-### Impact / Considerations
-
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this principle.
-
-
-## NAME OF UX PRINCIPLE 2
-
-Replace this text with a clear explanation of what the principle means.
+This UX principle involves designing a system for your end user, and not for yourself. This is done via plenty of feedback
 
 ### Relevance to the System
 
-Replace this text with an explanation of why the principle is relevant to this particular project.
+This principle is relevant to my app because It is being made for people who are about to move, and I am not likely to buy a house in the near future. Likely this app will be used by millenials/gen x with not too much experience with technology, and will likely be using phones for the app as they are easy to keep on person as you pack boxes
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this principle.
+I will need to make my UI easy to use, and ~~harass~~ consult my end user enough until they are happy with the end product for things like color, feel, features, and also 
+
+
+## Keep tasks quick
+
+This UX principle is about keeping things quick and easy for the user to do.
+
+### Relevance to the System
+
+This principle is very relevant to the system because the user will be adding lots of different items, so this needs to be a quick task, as to not become tedious and waste the users time. 
+
+### Impact / Considerations
+
+I will need to make the form to add an item to a box as short as possible, and as quick as possible, as
 
 
 ## NAME OF UX PRINCIPLE 3
