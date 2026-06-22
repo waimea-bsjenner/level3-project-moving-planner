@@ -28,6 +28,8 @@ This implication is relevant because if the app is constantly glitching, then it
 ### Impact / Considerations
 
 The project will need to prioritize bug fixing, and stability of the app, so it is functional for extended periods of time.
+ - App will be bug free
+ - App should stay online for at least an hour
 
 
 
@@ -42,6 +44,8 @@ If the end product is hard to use, then it will take significantly longer to use
 ### Impact / Considerations
 
 The project will need to be well designed and intuitive, with the use of appropriately colored buttons, links, etc, icons, and have a flow that feels natural to use.
+ - use connotative coloring e.g. green for yes red for no
+ - 
 
 
 
@@ -56,6 +60,10 @@ To use this app efficiently, it will be needed to be done on a handheld device y
 ### Impact / Considerations
 
 The project will need to be usable for different screen ratios, so I will have to design the app around this, and also include features for people with disabilities such as colorblindness
+ - doesn't fall to bits on mobile aspect ratios
+ - has a colorblind mode
+ - has alt text on every image
+ - light mode and dark mode
 
 
 
@@ -70,7 +78,8 @@ If you have people helping you with a move, then its likely they will also be us
 ### Impact / Considerations
 
 The project will need to have a way to allow limited access to other users who are simply helping with a move, but aren't signed in
-
+ - have a guest mode that can let a guest access and edit a specific move with a code
+ 
 
 
 ## Future proofing
@@ -84,6 +93,7 @@ If the end user move several times, over however many years, this app should be 
 ### Impact / Considerations
 
 The project will need to take long term use into account, including things such as help for remembering passwords, and long term data storage.
+ - password recovery via email, phone number
 
 
 
@@ -100,6 +110,7 @@ This principle is relevant to my app because It is being made for people who are
 ### Impact / Considerations
 
 I will need to make my UI easy to use, and ~~harass~~ consult my end user enough until they are happy with the end product for things like color, feel, features, and also 
+ - must exhaust end user out of all feedback
 
 
 ## Keep tasks quick
@@ -112,7 +123,8 @@ This principle is very relevant to the system because the user will be adding lo
 
 ### Impact / Considerations
 
-I will need to make the form to add an item to a box as short as possible, and as quick as possible, as
+I will need to make the form to add an item to a box as short as possible, and as quick as possible, as any small timeloss will quickly add up over time
+ - must make average time for adding an item to a box 1 second max
 
 
 ## NAME OF UX PRINCIPLE 3
