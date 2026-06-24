@@ -127,15 +127,16 @@ I will need to make the form to add an item to a box as short as possible, and a
  - must make average time for adding an item to a box 1 second max
 
 
-## NAME OF UX PRINCIPLE 3
+## Clear user flow
 
-Replace this text with a clear explanation of what the principle means.
+clear user flow is about keeping the app easy to understand and easy to use.
 
 ### Relevance to the System
 
-Replace this text with an explanation of why the principle is relevant to this particular project.
+Clear user flow is relevant to this project as an inclear user flow could lead to miscommunication between people in the same move, which could have the opposite effect of what the app is trying to achieve
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this principle.
+I will need to ensure that I have a good flow that is easy to understand and use for my users
+ - discuss with end user and finalize a UI with good flow before starting design
 
