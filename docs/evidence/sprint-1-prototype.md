@@ -25,22 +25,22 @@ Develop a design for the database and a UI prototype that simulates the key func
 
 ## Initial Database Design
 
-Replace this text with notes regarding the DB design.
+To start with the database, I made a design in DrawSQL. This has 4 tables, items, boxes, moves and users. Items are individual things in boxes, boxes are boxes, moves is for each time you move all your stuff into a new house, and users is users.
 
-![DB Design](screenshots/placeholder.png)
+![DB Design](screenshots/dbDesignV1.png)
 
 
 ### Required Data Input
 
-Replace this text with a description of what data will be input, and where / how it will be obtained.
+Inputted data will be minor information regarding the item, the box, and also the move. The user will also have to input their email and phone number optionally to help with account recovery if they wish to use the app later in the future
 
 ### Required Data Output
 
-Replace this text with a description of the outputs for the system - what types of data will be displayed?
+The system will output most of the data the user inputs, such as the details for any item and box, and address of the new place.
 
 ### Required Data Processing
 
-Replace this text with a description of how the data will be processed to achieve the desired output(s) - any processes / formulae?
+no
 
 
 ## UI 'Flow'

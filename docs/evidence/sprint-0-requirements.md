@@ -124,7 +124,7 @@ This principle is very relevant to the system because the user will be adding lo
 ### Impact / Considerations
 
 I will need to make the form to add an item to a box as short as possible, and as quick as possible, as any small timeloss will quickly add up over time
- - must make average time for adding an item to a box 1 second max
+ - must minimalise time to add an item to a box - MAX PRIORITY
 
 
 ## Clear user flow
