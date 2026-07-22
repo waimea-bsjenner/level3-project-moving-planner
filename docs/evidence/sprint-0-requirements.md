@@ -84,16 +84,15 @@ The project will need to have a way to allow limited access to other users who a
 
 ## Future proofing
 
-The end product should be usable in a few years time, as it is intended for the use of multiple moves for multiple users
+The end product should be easy to keep check of and edit over a long period of time, whilst not severely affecting UX
 
 ### Relevance to the System
 
-If the end user move several times, over however many years, this app should be functional for all of those times, as if it isn't built for long-term use, then there could be issues with using the app that mess up plans the end user might've had.
+The end product use is planned for several years, so ensuring that the system can be updated and still works is vital for effective use
 
 ### Impact / Considerations
 
-The project will need to take long term use into account, including things such as help for remembering passwords, and long term data storage.
- - password recovery via email, phone number
+
 
 
 
