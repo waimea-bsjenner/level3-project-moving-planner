@@ -92,7 +92,8 @@ The end product use is planned for several years, so ensuring that the system ca
 
 ### Impact / Considerations
 
-
+ - use of easily editable constants
+ - build pages in a modular way so they are easily editable
 
 
 
