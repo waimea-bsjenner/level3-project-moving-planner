@@ -53,13 +53,13 @@ This Figma demo shows the initial design for the UI 'flow':
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+I gave it to my end user who had a play around with it and decided that she liked it, however a feature that she would like integrated is a way to print a list of items inside a box, so it could be taped onto said box for better help finding an item
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+i added a print button to the box page that takes the user to a review page where they can see the list they'll be printing and then confirmation
 
-*IMPROVED FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+[prototype V1.5](https://design.penpot.app/#/view?file-id=bd31e32d-d69f-81e2-8008-637b90d00220&page-id=f0485fb1-4e63-8165-8008-3908f21f66a7&section=interactions&index=0&share-id=2be68822-842f-8175-8008-661819fb7d0f)
 
 
 ## Initial UI Prototype
