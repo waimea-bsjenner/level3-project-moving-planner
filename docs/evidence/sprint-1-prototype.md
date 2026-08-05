@@ -85,13 +85,17 @@ Replace this text with notes any improvements you made as a result of the testin
 
 Having established the layout of the UI screens, the prototype was refined visually, in terms of colour, fonts, etc.
 
+i asked my end user for her favorite color and it was a mint green, so i made a realtime colors with that
+
+[realtime colors](https://www.realtimecolors.com/?colors=adffda-0b2415-0d4d3b-072f24-00ffb2&fonts=Inter-Inter)
+
 This Figma demo shows the UI with refinements applied:
 
-*FIGMA REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+[prototype V3](https://www.realtimecolors.com/?colors=adffda-0b2415-0d4d3b-072f24-00ffb2&fonts=Inter-Inter)
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+Mr Copley said that the cancel and confirm buttons seemed really big and obtrusive, and suggested i changed the design to make them smaller, and more fitting to the color palette, as before they were a contrasting red and green compared to the minty teal i had before.
 
 ### Changes / Improvements
 
