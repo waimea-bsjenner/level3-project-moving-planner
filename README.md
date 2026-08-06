@@ -5,7 +5,7 @@
 This is an app that helps people move by keeping track of the contents of boxes
 
 The app has the following key features:
-- Feature one
+- Multiplayer
 - Feature two
 - Feature three
 - ...

@@ -101,7 +101,7 @@ Mr Copley said that the cancel and confirm buttons seemed really big and obtrusi
 
 Replace this text with notes any improvements you made as a result of the testing.
 
-*FIGMA IMPROVED REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+[prototype V3.5](https://design.penpot.app/#/view?file-id=3be9e5e1-190f-8090-8008-6f32469178ec&page-id=f0485fb1-4e63-8165-8008-3908f21f66a7&section=interactions&frame-id=97849926-5d12-8018-8008-39090d3ea4c0&index=0&share-id=3be9e5e1-190f-8090-8008-717e1d486c2a)
 
 
 ## Sprint Review
