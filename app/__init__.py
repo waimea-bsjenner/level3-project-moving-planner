@@ -40,8 +40,30 @@ def show_notes():
         flash("Test WARNING message", "warning")
         flash("Test ERROR message", "error")
 
-        return render_template("pages/note_list.jinja", notes=notes)
+        return render_template("pages/_base.jinja", notes=notes)
 
+#-----------------------------------------------------------
+# Sign up page
+#-----------------------------------------------------------
+@app.get("/signup_form")
+def sign_up_page():
+    return render_template("pages/signup.jinja")
+
+#-----------------------------------------------------------
+# Sign up route
+#-----------------------------------------------------------
+@app.post("/signup")
+def sign_up_route():
+    with connect_db() as db:
+        name = html.escape(request.form.get('name','').strip())
+        pass_pretend_its_hashed = html.escape(request.form.get('password','').strip())
+        sql = """
+            INSERT INTO users (name, pass_pretend_its_hashed)
+            VALUES (?, ?)
+        """
+        params = (name, pass_pretend_its_hashed)
+        db.execute(sql, params)
+        return render_template("pages/_base.jinja")
 
 #===========================================================
 # Configure the app
