@@ -28,10 +28,10 @@ class UserTable:
     """
 
     SEED_DATA = """
-            INSERT INTO user (id, name, pass_pretend_its_hashed) VALUES
+            INSERT INTO users (id, name, pass_pretend_its_hashed) VALUES
             (1, BiggRigg, ihatelilriggy),
             (2, Clieran Kark, rootytootypointnshooty),
-            (3, Hachlan Lunt, hfd%Re%^vb*&r%$cRV687BNy9dr5eXw45Cvtb78Bn896r^ced$%w34g578NH78BN89),
+            (3, Hachlan Lunt, hfd%Re%^vb*&r%$cRV687BNy9dr5eXw45Cvtb78Bn896r^ced$%w34g578NH78BN89)
     """ 
 
 class MoveTable:
@@ -49,13 +49,13 @@ class MoveTable:
     """
 
     SEED_DATA = """
-            INSERT INTO moves (id, user_id, address, date),
+            INSERT INTO moves (id, user_id, address, date) VALUES
             (1, 1, 5318008 street street, 27/07/2026),
             (2, 1, 1 john street, 01/01/0001),
             (3, 2, 4A Flightly Avenue, 01/05/2014),
             (4, 2, 68 Ranzau Road, 10/08/2026),
             (5, 3, 47389124321 Black Hole Galaxy, 23/05/3571),
-            (6, 3, 2 Jane Street, 02/01/0001),
+            (6, 3, 2 Jane Street, 02/01/0001)
     """
 
 class BoxTable:
@@ -85,7 +85,7 @@ class BoxTable:
             (9, 5, secrets of the universe, n-th dimension hyperplane),
             (10, 5, interstellar objects, bathroom),
             (11, 6, regrets, the deepest darkest recesses of the human mind),
-            (12, 6, pain., everywhere),
+            (12, 6, pain., everywhere)
     """
 
 class ItemTable:
@@ -141,7 +141,7 @@ class ItemTable:
             (34, 12, AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, 1, false),
             (35, 12, THE LAVAAAAAAAAAA IT BURNSSSSSSSSSSSS, 2, true),
             (36, 12, HELP MEEEEE PLEASEEEEEEEE, 3, true),
-            (37, 12, poster, 4, false),
+            (37, 12, poster, 4, false)
     """
 
 
