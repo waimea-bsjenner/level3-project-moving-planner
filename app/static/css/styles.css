@@ -4,9 +4,9 @@
 ===========================================================*/
 
 :root {
-    --text-col:         #111;
+    --text-col:         #101010;
 
-    --back-col:         #eee;
+    --back-col:         #fff;
     --back-col-panel:   #fff;
 
     --border-col:       #355;
@@ -63,37 +63,5 @@ main > h2 {
     font-size: 2rem;
     text-align: center;
     margin-block: 2rem;
-}
-
-
-/* Notes --------------------------------------------------*/
-
-#notes {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
-    align-items: start;
-
-    .note {
-        padding: 1rem;
-        box-shadow: 0 0.5rem 1rem #0004;
-        border: 1px solid var(--border-col);
-        background-color: var(--back-col-panel);
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        footer {
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-
-        &.pinned {
-            border-color: var(--accent-col);
-        }
-    }
 }
 

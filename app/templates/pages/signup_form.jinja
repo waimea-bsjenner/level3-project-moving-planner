@@ -30,8 +30,8 @@
         </a>
 
         <nav>
-            <a href="/signup_form">Sign Up</a>
-            <a href="/login_form">Log In</a>
+            <a href="/signup_form">Sign up</a>
+            <a href="/login_form">Log in</a>
         </nav>
     </header>
 
@@ -41,6 +41,19 @@
     <main>
 
         {% block content %}
+            <form method="post" action="/signup">
+                <label>
+                    Name
+                    <input name="name" type="text" required>
+                </label>
+
+                <label>
+                    Password
+                    <input name="password" type="password" required>
+                </label>
+
+                <button>Sign Up</button>
+            </form>
         {% endblock %}
 
     </main>

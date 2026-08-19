@@ -11,7 +11,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Notes Demo {% block title %}{% endblock %}</title>
+	<title>Move planner {% block title %}{% endblock %}</title>
 
     <link rel="icon" href="/static/images/note.svg">
 
@@ -25,15 +25,12 @@
 <body>
 
     <header>
-        <a href="/">
-            Notes Demo
-        </a>
-
-        <nav>
-            <a href="/">All Notes</a>
-            <a href="/">Link</a>
-            <a href="/">Link</a>
-        </nav>
+        {% if session.logged_in %}
+            Welcome, Admin!
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login_form">Login</a>
+        {% endif %}
     </header>
 
     {# Show flash messages from any previous events #}
@@ -42,19 +39,6 @@
     <main>
 
         {% block content %}
-            <form method="post" action="/signup">
-                <label>
-                    Name
-                    <input name="name" type="text" required>
-                </label>
-
-                <label>
-                    Password
-                    <input name="password" type="password" required>
-                </label>
-
-                <button>Sign Up</button>
-            </form>
         {% endblock %}
 
     </main>

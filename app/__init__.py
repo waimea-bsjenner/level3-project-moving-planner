@@ -24,30 +24,25 @@ app = Flask(__name__)
 # Home page - Show all notes
 #-----------------------------------------------------------
 @app.get("/")
-def show_notes():
-    with connect_db() as db:
-        sql = """
-            SELECT id, title, body, pinned, created
-            FROM note
-            ORDER BY pinned DESC, created DESC
-        """
-        params = ()
-        notes = db.execute(sql, params).fetchall()
-
-        flash("Test message")
-        flash("Test SUCCESS message", "success")
-        flash("Test INFO message", "info")
-        flash("Test WARNING message", "warning")
-        flash("Test ERROR message", "error")
-
-        return render_template("pages/_base.jinja", notes=notes)
+def home_page():
+        return render_template("pages/home.jinja")
 
 #-----------------------------------------------------------
 # Sign up page
 #-----------------------------------------------------------
 @app.get("/signup_form")
 def sign_up_page():
-    return render_template("pages/signup.jinja")
+    return render_template("pages/signup_form.jinja")
+
+
+
+#-----------------------------------------------------------
+# Log in page
+#-----------------------------------------------------------
+@app.get("/login_form")
+def log_in_page():
+    return render_template("pages/login_form.jinja")
+
 
 #-----------------------------------------------------------
 # Sign up route
@@ -56,14 +51,58 @@ def sign_up_page():
 def sign_up_route():
     with connect_db() as db:
         name = html.escape(request.form.get('name','').strip())
-        pass_pretend_its_hashed = html.escape(request.form.get('password','').strip())
+        pass_hash = generate_password_hash(html.escape(request.form.get('password','').strip()))
         sql = """
-            INSERT INTO users (name, pass_pretend_its_hashed)
+            INSERT INTO users (name, pass_hash)
             VALUES (?, ?)
         """
-        params = (name, pass_pretend_its_hashed)
+        params = (name, pass_hash)
         db.execute(sql, params)
-        return render_template("pages/_base.jinja")
+        return render_template("/")
+    
+
+#-----------------------------------------------------------
+# Log in route
+#-----------------------------------------------------------
+@app.post("/login")
+def log_in_route():
+    username = request.form.get('name', '').strip().lower()
+    password = request.form.get('password', '').strip()
+
+    with connect_db() as db:
+        sql = """
+            SELECT id, name, pass_hash
+            FROM users
+            WHERE name=?
+        """
+        params = (username,)
+        user = db.execute(sql, params).fetchone()
+
+        if not user:
+            flash(f"Unknown user", "error")
+            return redirect("/login")
+
+        if not check_password_hash(user["pass_hash"], password):
+            flash(f"Incorrect password", "error")
+            return redirect("/login")
+
+        session["logged_in"] = True
+        session["user"] = {
+            "id":       user["id"],
+            "name": user["name"]
+        }
+
+        flash("Login successful", "success")
+        return redirect("/")
+    
+
+#-----------------------------------------------------------
+# Weird page
+#-----------------------------------------------------------
+@app.get("/weird")
+def weird_route():
+    return redirect("pages/weird.html")
+
 
 #===========================================================
 # Configure the app
