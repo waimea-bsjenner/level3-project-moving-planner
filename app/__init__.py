@@ -21,11 +21,26 @@ app = Flask(__name__)
 #===========================================================
 
 #-----------------------------------------------------------
-# Home page - Show all notes
+# Home page
 #-----------------------------------------------------------
 @app.get("/")
 def home_page():
-        return render_template("pages/home.jinja")
+        if session.get("logged_in"):
+            with connect_db() as db:
+                sql = """
+                    SELECT * FROM users WHERE id=?
+                """
+                params = (session["user"]["id"],)
+                user=db.execute(sql,params).fetchone()
+                sql = """
+                    SELECT * FROM moves WHERE user_id=?
+                """
+                params = (session["user"]["id"],)
+                userMoves=db.execute(sql,params).fetchone()
+                
+                return render_template("pages/home.jinja", user=user, userMoves=userMoves)
+        else:
+            return render_template("pages/home.jinja")
 
 #-----------------------------------------------------------
 # Sign up page
@@ -58,8 +73,8 @@ def sign_up_route():
         """
         params = (name, pass_hash)
         db.execute(sql, params)
-        return render_template("/")
-    
+        return redirect("/")
+
 
 #-----------------------------------------------------------
 # Log in route
@@ -94,14 +109,23 @@ def log_in_route():
 
         flash("Login successful", "success")
         return redirect("/")
-    
+
+
+#-----------------------------------------------------------
+# Log out route
+#-----------------------------------------------------------
+@app.get("/logout")
+def logout_user():
+    session.clear()
+    flash(f"You have been logged out", "success")
+    return redirect("/")
 
 #-----------------------------------------------------------
 # Weird page
 #-----------------------------------------------------------
 @app.get("/weird")
 def weird_route():
-    return redirect("pages/weird.html")
+    return render_template("pages/weird.html")
 
 
 #===========================================================

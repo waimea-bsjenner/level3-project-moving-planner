@@ -41,43 +41,7 @@
     <main>
 
         {% block content %}
-            {% if session.logged_in %}
-                <p>Welcome, {{ user.name }}!</p>
-
-                <p>My Moves</p>
-                <div>
-                    
-                </div>
-
-                <p>helping someone else move?</p>
-                <form method="post" action="/join">
-                    <label>
-                        code
-                        <input name="code" type="text" required>
-                    </label>
-
-                    <button>Join</button>
-                </form>
-
-            {% else %}
-
-                <p>Welcome, guest!</p>
-
-                <p>helping someone else move?</p>
-                <form method="post" action="/join">
-                    <label>
-                        code
-                        <input name="code" type="text" required>
-                    </label>
-                    <label>
-                        name
-                        <input name="name" type="text" required>
-                    </label>
-
-                    <button>Join</button>
-                </form>
-
-            {% endif %}
+            <p>Welcome, {{ user.name }}!</p>
         {% endblock %}
 
     </main>
