@@ -31,12 +31,15 @@ def home_page():
                     SELECT * FROM users WHERE id=?
                 """
                 params = (session["user"]["id"],)
-                user=db.execute(sql,params).fetchone()
+
+                user = db.execute(sql,params).fetchone()
+
                 sql = """
                     SELECT * FROM moves WHERE user_id=?
                 """
                 params = (session["user"]["id"],)
-                userMoves=db.execute(sql,params).fetchone()
+                
+                userMoves = db.execute(sql,params).fetchone()
                 
                 return render_template("pages/home.jinja", user=user, userMoves=userMoves)
         else:
@@ -95,11 +98,11 @@ def log_in_route():
 
         if not user:
             flash(f"Unknown user", "error")
-            return redirect("/login")
+            return redirect("/login_form")
 
         if not check_password_hash(user["pass_hash"], password):
             flash(f"Incorrect password", "error")
-            return redirect("/login")
+            return redirect("/login_form")
 
         session["logged_in"] = True
         session["user"] = {
@@ -118,6 +121,13 @@ def log_in_route():
 def logout_user():
     session.clear()
     flash(f"You have been logged out", "success")
+    return redirect("/")
+
+#-----------------------------------------------------------
+# Joining a move route
+#-----------------------------------------------------------
+@app.post("/join")
+def join():
     return redirect("/")
 
 #-----------------------------------------------------------

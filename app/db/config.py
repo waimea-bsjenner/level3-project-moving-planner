@@ -44,18 +44,19 @@ class MoveTable:
             user_id        INTEGER,
             address        TEXT NOT NULL,
             date           TEXT,
+            move_code      TEXT,
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
     """
 
     SEED_DATA = """
-            INSERT INTO moves (id, user_id, address, date) VALUES
-            (1, 1, "5318008 street street", "2026-07-27"),
-            (2, 1, "1 john street", "0001-01-01"),
-            (3, 2, "4A Flightly Avenue", "2014-05-01"),
-            (4, 2, "68 Ranzau Road", "2026-08-10"),
-            (5, 3, "47389124321 Black Hole Galaxy", "3571-05-23"),
-            (6, 3, "2 Jane Street", "0001-01-02")
+            INSERT INTO moves (id, user_id, address, date, move_code) VALUES
+            (1, 1, "5318008 street street", "2026-07-27", NULL),
+            (2, 1, "1 john street", "0001-01-01", NULL),
+            (3, 2, "4A Flightly Avenue", "2014-05-01", NULL),
+            (4, 2, "68 Ranzau Road", "2026-08-10", NULL),
+            (5, 3, "47389124321 Black Hole Galaxy", "3571-05-23", NULL),
+            (6, 3, "2 Jane Street", "0001-01-02", NULL)
     """
 
 class BoxTable:
