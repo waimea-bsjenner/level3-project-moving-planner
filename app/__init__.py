@@ -39,9 +39,9 @@ def home_page():
                 """
                 params = (session["user"]["id"],)
                 
-                userMoves = db.execute(sql,params).fetchone()
+                moves = db.execute(sql,params).fetchall()
                 
-                return render_template("pages/home.jinja", user=user, userMoves=userMoves)
+                return render_template("pages/home.jinja", user=user, moves=moves)
         else:
             return render_template("pages/home.jinja")
 
@@ -84,7 +84,7 @@ def sign_up_route():
 #-----------------------------------------------------------
 @app.post("/login")
 def log_in_route():
-    username = request.form.get('name', '').strip().lower()
+    username = request.form.get('name', '').strip()
     password = request.form.get('password', '').strip()
 
     with connect_db() as db:
@@ -128,7 +128,36 @@ def logout_user():
 #-----------------------------------------------------------
 @app.post("/join")
 def join():
-    return redirect("/")
+    move_code = request.form.get('code','')
+    with connect_db() as db:
+        sql = """
+            SELECT * FROM moves WHERE move_code=?
+        """
+        params = (move_code,)
+        move = db.execute(sql, params).fetchone()
+        if not move:
+            flash(f"Incorrect code", "error")
+            return redirect("/")
+        else:
+            return redirect(f"/move/{move[0]}")
+
+
+#-----------------------------------------------------------
+# Move page
+#-----------------------------------------------------------
+@app.get("/move/<int:id>")
+def move(id):
+    with connect_db() as db:
+        sql = """
+            SELECT * FROM moves WHERE id=? 
+        """
+        params = (id,)
+        move = db.execute(sql, params).fetchone()
+        sql = """
+            SELECT * FROM boxes WHERE move_id=?
+        """
+        boxes = db.execute(sql, params).fetchall()
+        return render_template("pages/move.jinja", move=move, boxes=boxes)
 
 #-----------------------------------------------------------
 # Weird page

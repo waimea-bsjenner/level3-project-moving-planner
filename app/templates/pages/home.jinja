@@ -46,7 +46,9 @@
 
                 <p>My Moves</p>
                 <div>
-                    
+                    {% for move in moves %}
+                        <a href="/move/{{move.id}}">{{ move.address }}</a>
+                    {% endfor %}
                 </div>
 
                 <p>helping someone else move?</p>
