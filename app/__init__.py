@@ -10,6 +10,8 @@ from os import getenv
 from io import BytesIO
 import html
 from app.helpers import *
+import random
+import string
 
 
 # Create the app
@@ -158,6 +160,23 @@ def move(id):
         """
         boxes = db.execute(sql, params).fetchall()
         return render_template("pages/move.jinja", move=move, boxes=boxes)
+
+#-----------------------------------------------------------
+# Generate new code
+#-----------------------------------------------------------
+@app.get("/new_code/<int:id>")
+def new_code(id):
+    with connect_db() as db:
+        code = ""
+        for _ in range[8]:
+            code.join(random.choice(string.ascii_letters + string.digits + string.punctuation))
+        sql = """
+            INSERT INTO moves (move_code) WHERE id=? VALUES (?)
+        """
+        params = (id, code)
+
+        db.execute(sql,params)
+        return redirect(f"/move/{id}")
 
 #-----------------------------------------------------------
 # Weird page

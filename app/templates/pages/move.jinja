@@ -42,7 +42,11 @@
 
         {% block content %}
             <p>{{ move.address }}</p>
-            <p>Code to let others join:</p>
+            {% if session.logged_in %}
+                <p>Code to let others join: {{move.code}}</p>
+                <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
+            {% else %}
+            {% endif %}
         {% endblock %}
 
     </main>
