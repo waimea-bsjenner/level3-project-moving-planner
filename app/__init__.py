@@ -144,7 +144,7 @@ def join():
             return redirect(f"/move/{move[0]}")
 
 
-#-----------------------------------------------------------
+#-----------------------------------------------------------    
 # Move page
 #-----------------------------------------------------------
 @app.get("/move/<int:id>")
@@ -167,17 +167,61 @@ def move(id):
 @app.get("/new_code/<int:id>")
 def new_code(id):
     with connect_db() as db:
-        code = ""
-        for _ in range[8]:
-            code.join(random.choice(string.ascii_letters + string.digits + string.punctuation))
+        code = ''.join(random.choices(string.ascii_letters+string.digits+string.punctuation, k=8))
         sql = """
-            INSERT INTO moves (move_code) WHERE id=? VALUES (?)
+            UPDATE moves SET move_code=? WHERE id=? 
         """
-        params = (id, code)
+        params = (code, id)
 
         db.execute(sql,params)
         return redirect(f"/move/{id}")
 
+#-----------------------------------------------------------
+# Box page
+#-----------------------------------------------------------
+@app.get("/box/<int:id>")
+def box(id):
+    with connect_db() as db:
+        sql = """
+            SELECT * FROM boxes WHERE id=? 
+        """
+        params = (id,)
+        box = db.execute(sql, params).fetchone()
+        sql = """
+            SELECT * FROM items WHERE box_id=?
+        """
+        items = db.execute(sql, params).fetchall()
+        return render_template("pages/box.jinja", box=box, items=items)
+
+
+#-----------------------------------------------------------
+# Item page
+#-----------------------------------------------------------
+@app.get("/item/<int:id>")
+def item(id):
+    with connect_db() as db:
+        sql = """
+            SELECT * FROM items WHERE id=? 
+        """
+        params = (id,)
+
+        item = db.execute(sql, params).fetchone()
+        return render_template("pages/item.jinja", item=item)
+
+
+#-----------------------------------------------------------
+# New Move route
+#-----------------------------------------------------------
+@app.post("/new_move")
+def new_move():
+    address = request.form.get('address','')
+    date = request.form.get('date','')
+    with connect_db() as db:
+        sql = """
+            INSERT INTO moves (address, date) VALUES (?, ?)
+        """
+        params = (address, date)
+        db.execute(sql,params)
 #-----------------------------------------------------------
 # Weird page
 #-----------------------------------------------------------

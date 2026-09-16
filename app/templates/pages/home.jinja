@@ -51,6 +51,18 @@
                     {% endfor %}
                 </div>
 
+                <form method="post" action="/new_move">
+                    <label>
+                        address
+                        <input name="address" type="text" required>
+                    </label>
+
+                    <label>
+                        date
+                        <input name="date" type="date" required>
+                    </label>
+                </form>
+
                 <p>helping someone else move?</p>
                 <form method="post" action="/join">
                     <label>

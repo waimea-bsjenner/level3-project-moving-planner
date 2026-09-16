@@ -41,16 +41,11 @@
     <main>
 
         {% block content %}
-            <p>{{ move.address }}</p>
-            {% if session.logged_in %}
-                <p>Code to let others join: {{move.code}}</p>
-                <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
-            {% else %}
-            {% endif %}
+            <p>{{ box.name }}</p>
 
             <div>
-                {% for box in boxes %}
-                    <a href="/box/{{ box.id }}">{{ box.name }}</a>
+                {% for item in items %}
+                    <a href="/item/{{ item.id }}">{{ item.name }}</a>
                 {% endfor %}
             </div>
         {% endblock %}

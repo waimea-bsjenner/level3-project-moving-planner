@@ -41,18 +41,11 @@
     <main>
 
         {% block content %}
-            <p>{{ move.address }}</p>
-            {% if session.logged_in %}
-                <p>Code to let others join: {{move.code}}</p>
-                <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
-            {% else %}
+            <p>{{ item.name }}</p>
+            {% if item.fragile %}
+                <p>{{ item.name }} is <strong>fragile</strong>!!!!</p>
             {% endif %}
-
-            <div>
-                {% for box in boxes %}
-                    <a href="/box/{{ box.id }}">{{ box.name }}</a>
-                {% endfor %}
-            </div>
+            <p>there are {{ item.count }} of {{ item.name }}</p>
         {% endblock %}
 
     </main>
