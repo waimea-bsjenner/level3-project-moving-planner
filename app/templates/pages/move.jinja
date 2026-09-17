@@ -42,8 +42,8 @@
 
         {% block content %}
             <p>{{ move.address }}</p>
-            {% if session.logged_in %}
-                <p>Code to let others join: {{move.code}}</p>
+            {% if session.logged_in and  == owner_id %}
+                <p>Code to let others join: {{ move.move_code }}</p>
                 <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
             {% else %}
             {% endif %}
@@ -53,6 +53,19 @@
                     <a href="/box/{{ box.id }}">{{ box.name }}</a>
                 {% endfor %}
             </div>
+
+            <form method="post" action="/new_box/{{ move.id }}">
+                <p>add another box:</p>
+                <label>
+                    address
+                    <input name="name" type="text" required>
+                </label>
+                <label>
+                    date
+                    <input name="location" type="text" required>
+                </label>
+                <button>Add new box</button>
+            </form>
         {% endblock %}
 
     </main>

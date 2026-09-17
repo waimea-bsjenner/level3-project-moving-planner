@@ -1,6 +1,6 @@
 #===========================================================
-# PROJECT NAME HERE
-# By YOUR NAME HERE
+# Move Planner to help u move :>
+# By Benjamin Jeener
 #===========================================================
 
 from flask import Flask, request, session, render_template, flash, redirect, send_file, make_response
@@ -141,7 +141,7 @@ def join():
             flash(f"Incorrect code", "error")
             return redirect("/")
         else:
-            return redirect(f"/move/{move[0]}")
+            return redirect(f"/move/{move["id"]}")
 
 
 #-----------------------------------------------------------    
@@ -158,8 +158,9 @@ def move(id):
         sql = """
             SELECT * FROM boxes WHERE move_id=?
         """
+        user_id = move["user_id"]
         boxes = db.execute(sql, params).fetchall()
-        return render_template("pages/move.jinja", move=move, boxes=boxes)
+        return render_template("pages/move.jinja", move=move, boxes=boxes, owner_id=user_id)
 
 #-----------------------------------------------------------
 # Generate new code
@@ -212,16 +213,53 @@ def item(id):
 #-----------------------------------------------------------
 # New Move route
 #-----------------------------------------------------------
-@app.post("/new_move")
-def new_move():
+@app.post("/new_move/<int:id>")
+def new_move(id):
     address = request.form.get('address','')
     date = request.form.get('date','')
+    print(date)
+    user_id = id
     with connect_db() as db:
         sql = """
-            INSERT INTO moves (address, date) VALUES (?, ?)
+            INSERT INTO moves (address, date, user_id) VALUES (?, ?, ?)
         """
-        params = (address, date)
+        params = (address, date, user_id)
         db.execute(sql,params)
+        return redirect("/")
+    
+#-----------------------------------------------------------
+# New Box route
+#-----------------------------------------------------------
+@app.post("/new_box/<int:id>")
+def new_box(id):
+    name = request.form.get('name','')
+    location = request.form.get('location','')
+    move_id = id
+    with connect_db() as db:
+        sql = """
+            INSERT INTO boxes (name, location, move_id) VALUES (?, ?, ?)
+        """
+        params = (name, location, move_id)
+        db.execute(sql,params)
+        return redirect(f"/move/{id}")
+    
+#-----------------------------------------------------------
+# New Item route
+#-----------------------------------------------------------
+@app.post("/new_item/<int:id>")
+def new_box(id):
+    name = request.form.get('name','')
+    fragile = request.form.get('fragile','')
+    count = request.form.get('count','')
+    box_id = id
+    with connect_db() as db:
+        sql = """
+            INSERT INTO moves (name, fragile, count, box_id) VALUES (?, ?, ?, ?)
+        """
+        params = (name, fragile, count, box_id)
+        db.execute(sql,params)
+        return redirect(f"/box/{id}")
+
 #-----------------------------------------------------------
 # Weird page
 #-----------------------------------------------------------

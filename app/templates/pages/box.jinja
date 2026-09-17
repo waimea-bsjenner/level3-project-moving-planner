@@ -48,6 +48,23 @@
                     <a href="/item/{{ item.id }}">{{ item.name }}</a>
                 {% endfor %}
             </div>
+
+            <form method="post" action="/new_item/{{ box.id }}">
+                <p>add another item:</p>
+                <label>
+                    name
+                    <input name="name" type="text" required>
+                </label>
+                <label>
+                    fragile
+                    <input name="fragile" type="boolean" required>
+                </label>
+                <label>
+                    count
+                    <input name="count" type="int" required>
+                </label>
+                <button>Add new item</button>
+            </form>
         {% endblock %}
 
     </main>

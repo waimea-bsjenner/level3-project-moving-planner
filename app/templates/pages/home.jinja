@@ -47,11 +47,12 @@
                 <p>My Moves</p>
                 <div>
                     {% for move in moves %}
-                        <a href="/move/{{move.id}}">{{ move.address }}</a>
+                        <a href="/move/{{ move.id }}">{{ move.address }}</a>
                     {% endfor %}
                 </div>
 
-                <form method="post" action="/new_move">
+                <form method="post" action="/new_move/{{ user.id }}">
+                    <p>moving somewhere else?</p>
                     <label>
                         address
                         <input name="address" type="text" required>
@@ -61,6 +62,7 @@
                         date
                         <input name="date" type="date" required>
                     </label>
+                    <button>Add new move</button>
                 </form>
 
                 <p>helping someone else move?</p>
