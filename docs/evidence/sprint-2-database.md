@@ -21,9 +21,9 @@ Implement the database, populated with test data. Create queries that retrieve t
     - Etc.
 
 
-## Testing FEATURE NAME HERE
+## Testing Displayment of data
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+getting data to show up on the screen, tested by looking at the screen
 
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
 

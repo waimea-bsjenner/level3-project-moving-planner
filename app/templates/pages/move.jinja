@@ -42,7 +42,7 @@
 
         {% block content %}
             <p>{{ move.address }}</p>
-            {% if session.logged_in and  == owner_id %}
+            {% if session.logged_in and session.user.id == owner_id %}
                 <p>Code to let others join: {{ move.move_code }}</p>
                 <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
             {% else %}
@@ -57,11 +57,11 @@
             <form method="post" action="/new_box/{{ move.id }}">
                 <p>add another box:</p>
                 <label>
-                    address
+                    name
                     <input name="name" type="text" required>
                 </label>
                 <label>
-                    date
+                    location
                     <input name="location" type="text" required>
                 </label>
                 <button>Add new box</button>

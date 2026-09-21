@@ -57,7 +57,10 @@
                 </label>
                 <label>
                     fragile
-                    <input name="fragile" type="boolean" required>
+                    <select name="fragile" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
                 </label>
                 <label>
                     count
@@ -65,6 +68,9 @@
                 </label>
                 <button>Add new item</button>
             </form>
+
+            <a href="/delete_box/{{ box.id }}">Delete Box?</a>
+            <p><strong>Warning!</strong> This will delete all the items inside!</p>
         {% endblock %}
 
     </main>

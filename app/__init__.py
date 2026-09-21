@@ -168,7 +168,7 @@ def move(id):
 @app.get("/new_code/<int:id>")
 def new_code(id):
     with connect_db() as db:
-        code = ''.join(random.choices(string.ascii_letters+string.digits+string.punctuation, k=8))
+        code = ''.join(random.choices(string.ascii_letters+string.digits+'!'+'@'+'#'+'$'+'%'+'&', k=8))
         sql = """
             UPDATE moves SET move_code=? WHERE id=? 
         """
@@ -247,19 +247,80 @@ def new_box(id):
 # New Item route
 #-----------------------------------------------------------
 @app.post("/new_item/<int:id>")
-def new_box(id):
+def new_item(id):
     name = request.form.get('name','')
     fragile = request.form.get('fragile','')
     count = request.form.get('count','')
     box_id = id
     with connect_db() as db:
         sql = """
-            INSERT INTO moves (name, fragile, count, box_id) VALUES (?, ?, ?, ?)
+            INSERT INTO items (name, fragile, count, box_id) VALUES (?, ?, ?, ?)
         """
         params = (name, fragile, count, box_id)
         db.execute(sql,params)
         return redirect(f"/box/{id}")
-
+    
+#-----------------------------------------------------------
+# Delete Box route
+#-----------------------------------------------------------
+@app.get("/delete_box/<int:id>")
+def delete_box(id):
+    with connect_db() as db:
+        sql = """
+            SELECT move_id FROM boxes WHERE id=?
+        """
+        params = (id,)
+        move_id = db.execute(sql,params).fetchone()
+        sql = """
+            DELETE FROM boxes WHERE id=?
+        """
+        db.execute(sql,params)
+        sql = """
+            DELETE FROM items WHERE box_id=?
+        """
+        db.execute(sql,params)
+        return redirect(f"/move/{move_id["move_id"]}")
+    
+#-----------------------------------------------------------
+# Delete move route
+#-----------------------------------------------------------
+@app.get("/delete_move/<int:id>")
+def delete_move(id):
+    with connect_db() as db:
+        sql = """
+            SELECT user_id FROM moves WHERE id=?
+        """
+        params = (id,)
+        sql = """
+            DELETE FROM moves WHERE id=?
+        """
+        db.execute(sql,params)
+        sql = """
+            DELETE FROM boxes WHERE move_id=?
+        """
+        db.execute(sql,params)
+        return redirect(f"/")
+    
+#-----------------------------------------------------------
+# Delete Box route
+#-----------------------------------------------------------
+@app.get("/delete_box/<int:id>")
+def delete_box(id):
+    with connect_db() as db:
+        sql = """
+            SELECT move_id FROM boxes WHERE id=?
+        """
+        params = (id,)
+        move_id = db.execute(sql,params).fetchone()
+        sql = """
+            DELETE FROM boxes WHERE id=?
+        """
+        db.execute(sql,params)
+        sql = """
+            DELETE FROM items WHERE box_id=?
+        """
+        db.execute(sql,params)
+        return redirect(f"/move/{move_id["move_id"]}")
 #-----------------------------------------------------------
 # Weird page
 #-----------------------------------------------------------
