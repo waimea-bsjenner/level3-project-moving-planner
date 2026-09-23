@@ -78,6 +78,27 @@ def sign_up_route():
         """
         params = (name, pass_hash)
         db.execute(sql, params)
+        sql = """
+            SELECT id, name, pass_hash
+            FROM users
+            WHERE name=?
+        """
+        params = (name,)
+        user = db.execute(sql, params).fetchone()
+
+        if not user:
+            flash(f"Unknown user", "error")
+            return redirect("/login_form")
+
+        if not check_password_hash(user["pass_hash"], password):
+            flash(f"Incorrect password", "error")
+            return redirect("/login_form")
+
+        session["logged_in"] = True
+        session["user"] = {
+            "id":       user["id"],
+            "name": user["name"]
+        }
         return redirect("/")
 
 
@@ -192,7 +213,12 @@ def box(id):
             SELECT * FROM items WHERE box_id=?
         """
         items = db.execute(sql, params).fetchall()
-        return render_template("pages/box.jinja", box=box, items=items)
+        sql = """
+            SELECT * FROM moves WHERE id=?
+        """
+        params = (box["move_id"],)
+        move = db.execute(sql, params).fetchone()
+        return render_template("pages/box.jinja", move=move, box=box, items=items)
 
 
 #-----------------------------------------------------------
@@ -205,9 +231,13 @@ def item(id):
             SELECT * FROM items WHERE id=? 
         """
         params = (id,)
-
         item = db.execute(sql, params).fetchone()
-        return render_template("pages/item.jinja", item=item)
+        sql = """
+            SELECT * FROM boxes WHERE id=?
+        """
+        params = (item["box_id"],)
+        box = db.execute(sql, params).fetchone()
+        return render_template("pages/item.jinja", item=item, box=box)
 
 
 #-----------------------------------------------------------
@@ -261,25 +291,22 @@ def new_item(id):
         return redirect(f"/box/{id}")
     
 #-----------------------------------------------------------
-# Delete Box route
+# Delete Item route
 #-----------------------------------------------------------
-@app.get("/delete_box/<int:id>")
-def delete_box(id):
+@app.get("/delete_item/<int:id>")
+def delete_item(id):
     with connect_db() as db:
         sql = """
-            SELECT move_id FROM boxes WHERE id=?
+            SELECT box_id FROM items WHERE id=?
         """
         params = (id,)
-        move_id = db.execute(sql,params).fetchone()
-        sql = """
-            DELETE FROM boxes WHERE id=?
-        """
+        box_id = db.execute(sql,params).fetchone()
         db.execute(sql,params)
         sql = """
-            DELETE FROM items WHERE box_id=?
+            DELETE FROM items WHERE id=?
         """
         db.execute(sql,params)
-        return redirect(f"/move/{move_id["move_id"]}")
+        return redirect(f"/box/{box_id["box_id"]}")
     
 #-----------------------------------------------------------
 # Delete move route

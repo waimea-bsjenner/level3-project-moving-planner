@@ -12,11 +12,10 @@ Implement the database, populated with test data. Create queries that retrieve t
 - Implement the database
 - Add test data to the database
 - Create the following web pages:
-    - Home pages showing...
-    - Details page for ...
-    - Etc.
+    - Home page showing the moves of a user, a form to add a new move, and an option to join someone else's move
+    - Details page for move, box, item
 - Develop SQL database queries to:
-    - Retrieve all ...
+    - Retrieve all...
     - Retrieve specific ...
     - Etc.
 
@@ -36,24 +35,24 @@ Replace this text with notes any improvements you made as a result of the testin
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
 
 
-## Testing FEATURE NAME HERE
+## Testing Sign up/Log in
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+signing up and logging in to the website so you can have your own private data
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![signing up and then logging in](screenshots/signUpLogInTest.gif)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+It was annoying to manually log in after signing up so I changed it so that it immediately logs in after creating an account
 
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
 
 
-## Testing FEATURE NAME HERE
+## Testing going backwards to the container
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+this is a link that takes you to the user of a move, the move of a box, or the box of an item.
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![image of item page rendering route](screenshots/backTesting.png)
 
 ### Changes / Improvements
 

@@ -43,6 +43,8 @@
         {% block content %}
             <p>{{ box.name }}</p>
 
+            <a href="/move/{{ move.id }}">Back to {{ move.address }}</a>
+
             <div>
                 {% for item in items %}
                     <a href="/item/{{ item.id }}">{{ item.name }}</a>
@@ -64,7 +66,7 @@
                 </label>
                 <label>
                     count
-                    <input name="count" type="int" required>
+                    <input name="count" type="number" required>
                 </label>
                 <button>Add new item</button>
             </form>

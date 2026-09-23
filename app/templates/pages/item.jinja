@@ -41,11 +41,14 @@
     <main>
 
         {% block content %}
+            <a href="/box/{{ box.id }}">Back to {{ box.name }}</a>
             <p>{{ item.name }}</p>
             {% if item.fragile %}
                 <p>{{ item.name }} is <strong>fragile</strong>!!!!</p>
             {% endif %}
             <p>there are {{ item.count }} of {{ item.name }}</p>
+
+            <a href="/delete_item/{{ item.id }}">delete Item?</a>
         {% endblock %}
 
     </main>

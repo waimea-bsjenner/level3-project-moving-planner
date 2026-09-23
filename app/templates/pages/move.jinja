@@ -42,6 +42,8 @@
 
         {% block content %}
             <p>{{ move.address }}</p>
+
+            <a href="/">back to Home</a>
             {% if session.logged_in and session.user.id == owner_id %}
                 <p>Code to let others join: {{ move.move_code }}</p>
                 <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
@@ -66,6 +68,8 @@
                 </label>
                 <button>Add new box</button>
             </form>
+
+            <a href="/delete_move/{{ move.id }}">Delete move?</a>
         {% endblock %}
 
     </main>
