@@ -86,14 +86,6 @@ def sign_up_route():
         params = (name,)
         user = db.execute(sql, params).fetchone()
 
-        if not user:
-            flash(f"Unknown user", "error")
-            return redirect("/login_form")
-
-        if not check_password_hash(user["pass_hash"], password):
-            flash(f"Incorrect password", "error")
-            return redirect("/login_form")
-
         session["logged_in"] = True
         session["user"] = {
             "id":       user["id"],
@@ -197,7 +189,19 @@ def new_code(id):
 
         db.execute(sql,params)
         return redirect(f"/move/{id}")
-
+    
+#-----------------------------------------------------------
+# Delete code
+#-----------------------------------------------------------
+@app.get("/delete_code/<int:id>")
+def delete_code(id):
+    with connect_db() as db:
+        sql = """
+            UPDATE moves SET move_code="" WHERE id=?
+        """
+        params=(id,)
+        db.execute(sql,params)
+        return redirect(f"/move/{id}")
 #-----------------------------------------------------------
 # Box page
 #-----------------------------------------------------------

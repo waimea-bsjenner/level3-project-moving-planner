@@ -46,7 +46,7 @@
             <a href="/">back to Home</a>
             {% if session.logged_in and session.user.id == owner_id %}
                 <p>Code to let others join: {{ move.move_code }}</p>
-                <a href="/new_code/{{move.id}}"><button>Generate new code</button></a>
+                <a href="/new_code/{{move.id}}"><button>Generate new code</button></a> <a href="/delete_code/{{move.id}}"><button>Delete Code</button></a>
             {% else %}
             {% endif %}
 

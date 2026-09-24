@@ -20,19 +20,17 @@ Implement the database, populated with test data. Create queries that retrieve t
     - Etc.
 
 
-## Testing Displayment of data
+## Testing Displayment of YOUr data
 
-getting data to show up on the screen, tested by looking at the screen
+getting user-specfic data to show up on the screen, tested by looking at the screen
 
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
 
-![Placeholder](screenshots/placeholder.png)
+![gif showing user specific data for different users](screenshots/userSpecificData.gif)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+frick bro it shows data thats all its meant to do
 
 
 ## Testing Sign up/Log in
@@ -45,23 +43,25 @@ signing up and logging in to the website so you can have your own private data
 
 It was annoying to manually log in after signing up so I changed it so that it immediately logs in after creating an account
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+![signing up then immediately being logged in](screenshots/signUpIntoLogin.gif)
 
 
 ## Testing going backwards to the container
 
 this is a link that takes you to the user of a move, the move of a box, or the box of an item.
 
-![image of item page rendering route](screenshots/backTesting.png)
+![a button that takes you back to the container of the current content](screenshots/backButton.gif)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+this one also does its exact job
 
 
-## ETC...
+## remote access into another users move with the use of a randomly generated code
+
+ok this one was hard to do basically the same way you can join multiplayer games with a code you can join other peoples move with a code and help out with their stuff because generally moving isnt a one man job
+
+first I had to design a way to get a code for a move so I added a field to the moves table for move_code and left it blank/nu
 
 
 ## Sprint Review
