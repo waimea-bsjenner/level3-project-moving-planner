@@ -61,9 +61,11 @@ this one also does its exact job
 
 ok this one was hard to do basically the same way you can join multiplayer games with a code you can join other peoples move with a code and help out with their stuff because generally moving isnt a one man job
 
-first I had to design a way to get a code for a move so I added a field to the moves table for move_code and left it blank/nu
+first I had to design a way to get a code for a move so I added a field to the moves table for move_code and left it blank
 
+![the move code field in the config file](screenshots/moveCodeConfig.png)
 
+next I made a 
 ## Sprint Review
 
 Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.

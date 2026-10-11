@@ -147,6 +147,29 @@ class ItemTable:
     """
 
 
+class HelperTable:
+
+    NAME = "helpers"
+
+    SCHEMA = """
+        CREATE TABLE helpers (
+            user_id INTEGER NOT NULL,
+            move_id INTEGER NOT NULL,
+
+            FOREIGN KEY(user_id) REFERENCES users(id),
+            FOREIGN KEY(move_id) REFERENCES moves(id),
+
+            PRIMARY KEY(user_id, move_id)
+        )
+    """
+
+    SEED_DATA = """
+            INSERT INTO helpers (user_id, move_id) VALUES
+            (2, 1),
+            (3, 1)
+    """
+
+
 #----------------------------------------------------------------------------
 # Table registry
 #----------------------------------------------------------------------------
@@ -166,6 +189,7 @@ TABLES = [
     UserTable,
     MoveTable,
     BoxTable,
-    ItemTable
+    ItemTable,
+    HelperTable
 ]
 

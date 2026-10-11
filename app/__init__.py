@@ -153,8 +153,36 @@ def join():
         if not move:
             flash(f"Incorrect code", "error")
             return redirect("/")
+
+        sql = """
+            SELECT * FROM users WHERE name=?
+        """
+        name = request.form.get('name','')
+        params = (name,)
+        user = db.execute(sql,params).fetchone()
+        if not user:
+            # New user - need to add them
+            sql = """
+                INSERT INTO users (name, pass_hash) VALUES (?, ?)
+            """
+            pass_hash = generate_password_hash(html.escape(request.form.get('password','').strip()))
+            params = (name, pass_hash)
+            result = db.execute(sql,params)
+            user_id = result.last_input_id # TODO - this could be wrong
         else:
-            return redirect(f"/move/{move["id"]}")
+            # existing user - check pass
+            password = request.form.get('password','').strip()
+            valid_pass = check_password_hash(user["pass_hash"], password)
+
+            if not valid_pass:
+                flash(f"You have an account already, but that's the wrong password", "error")
+                return redirect("/")
+            
+            user_id = user["id"]
+            
+        # TODO
+        # login user - session
+        # Add them to the hel;pers table - move id and user_id'
 
 
 #-----------------------------------------------------------    
@@ -168,6 +196,19 @@ def move(id):
         """
         params = (id,)
         move = db.execute(sql, params).fetchone()
+
+        move_owner = move["user_id"]
+        if session.get("user"):
+            current_user = session.get("user").get("id")
+
+            if move_owner != current_user:
+                flash("You don't have access to that move", "error")
+                return redirect("/")
+        else:
+            flash("You don't have access to that move", "error")
+            return redirect("/")
+
+
         sql = """
             SELECT * FROM boxes WHERE move_id=?
         """
