@@ -179,10 +179,19 @@ def join():
                 return redirect("/")
             
             user_id = user["id"]
+            move_id = move["id"]
+
+            sql="""
+                INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
+            """
+            params = (user_id, move_id)
+            db.execute(sql, params)
+        
+            
             
         # TODO
         # login user - session
-        # Add them to the hel;pers table - move id and user_id'
+        # Add them to the helpers table - move id and user_id
 
 
 #-----------------------------------------------------------    
@@ -394,7 +403,7 @@ def delete_box(id):
         db.execute(sql,params)
         return redirect(f"/move/{move_id["move_id"]}")
 #-----------------------------------------------------------
-# Weird page
+# Weird route
 #-----------------------------------------------------------
 @app.get("/weird")
 def weird_route():
