@@ -153,7 +153,6 @@ def join():
         if not move:
             flash(f"Incorrect code", "error")
             return redirect("/")
-
         sql = """
             SELECT * FROM users WHERE name=?
         """
@@ -163,12 +162,12 @@ def join():
         if not user:
             # New user - need to add them
             sql = """
-                INSERT INTO users (name, pass_hash) VALUES (?, ?)
+                 INSERT INTO users (name, pass_hash) VALUES (?, ?)
             """
             pass_hash = generate_password_hash(html.escape(request.form.get('password','').strip()))
             params = (name, pass_hash)
             result = db.execute(sql,params)
-            user_id = result.last_input_id # TODO - this could be wrong
+            user_id = result # DO THIS RAHHHHHHHHHHHH
         else:
             # existing user - check pass
             password = request.form.get('password','').strip()
@@ -186,7 +185,12 @@ def join():
             """
             params = (user_id, move_id)
             db.execute(sql, params)
-        
+            session["logged_in"] = True
+            session["user"] = {
+            "id":       user["id"],
+            "name": user["name"]
+            }
+            return redirect(f"/move/{move_id}")
             
             
         # TODO
@@ -205,14 +209,20 @@ def move(id):
         """
         params = (id,)
         move = db.execute(sql, params).fetchone()
-
+        sql = """
+            SELECT * FROM helpers WHERE move_id=?
+        """
+        params =(move["id"],)
+        helpers = db.execute(sql,params).fetchall()
         move_owner = move["user_id"]
         if session.get("user"):
             current_user = session.get("user").get("id")
 
             if move_owner != current_user:
-                flash("You don't have access to that move", "error")
-                return redirect("/")
+                for helper in helpers:
+                    if helper["user_id"] != current_user:
+                        flash("You don't have access to that move", "error")
+                        return redirect("/")
         else:
             flash("You don't have access to that move", "error")
             return redirect("/")
@@ -221,9 +231,8 @@ def move(id):
         sql = """
             SELECT * FROM boxes WHERE move_id=?
         """
-        user_id = move["user_id"]
         boxes = db.execute(sql, params).fetchall()
-        return render_template("pages/move.jinja", move=move, boxes=boxes, owner_id=user_id)
+        return render_template("pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner)
 
 #-----------------------------------------------------------
 # Generate new code
