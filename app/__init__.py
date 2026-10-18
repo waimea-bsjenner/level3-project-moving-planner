@@ -166,8 +166,13 @@ def join():
             """
             pass_hash = generate_password_hash(html.escape(request.form.get('password','').strip()))
             params = (name, pass_hash)
-            result = db.execute(sql,params)
-            user_id = result # DO THIS RAHHHHHHHHHHHH
+            db.execute(sql,params)
+            sql = """
+                SELECT id FROM users WHERE name=?
+            """
+            params = (name,)
+            user_id = db.execute(sql,params).fetchone()
+            
         else:
             # existing user - check pass
             password = request.form.get('password','').strip()
@@ -181,16 +186,23 @@ def join():
             move_id = move["id"]
 
             sql="""
-                INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
+                SELECT * FROM helpers WHERE user_id=? AND move_id=?
             """
             params = (user_id, move_id)
-            db.execute(sql, params)
-            session["logged_in"] = True
-            session["user"] = {
-            "id":       user["id"],
-            "name": user["name"]
-            }
-            return redirect(f"/move/{move_id}")
+            result = db.execute(sql,params)
+            if not result:
+                sql="""
+                    INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
+                """
+                db.execute(sql, params)
+                session["logged_in"] = True
+                session["user"] = {
+                "id":       user["id"],
+                "name": user["name"]
+                }
+                return redirect(f"/move/{move_id}")
+            else:
+                return redirect(f"/move/{move_id}")
             
             
         # TODO
@@ -212,6 +224,10 @@ def move(id):
         sql = """
             SELECT * FROM helpers WHERE move_id=?
         """
+        sql = """
+            SELECT * FROM boxes WHERE move_id=?
+        """
+        boxes = db.execute(sql, params).fetchall()
         params =(move["id"],)
         helpers = db.execute(sql,params).fetchall()
         move_owner = move["user_id"]
@@ -224,14 +240,8 @@ def move(id):
                         flash("You don't have access to that move", "error")
                         return redirect("/")
         else:
-            flash("You don't have access to that move", "error")
-            return redirect("/")
+            return render_template("pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner)
 
-
-        sql = """
-            SELECT * FROM boxes WHERE move_id=?
-        """
-        boxes = db.execute(sql, params).fetchall()
         return render_template("pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner)
 
 #-----------------------------------------------------------
