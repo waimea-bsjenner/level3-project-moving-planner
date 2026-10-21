@@ -155,6 +155,7 @@ class HelperTable:
         CREATE TABLE helpers (
             user_id INTEGER NOT NULL,
             move_id INTEGER NOT NULL,
+            user_name TEXT NOT NULL,
 
             FOREIGN KEY(user_id) REFERENCES users(id),
             FOREIGN KEY(move_id) REFERENCES moves(id),
@@ -164,9 +165,9 @@ class HelperTable:
     """
 
     SEED_DATA = """
-            INSERT INTO helpers (user_id, move_id) VALUES
-            (2, 1),
-            (3, 1)
+            INSERT INTO helpers (user_id, move_id, user_name) VALUES
+            (2, 1, "Clieran Kark"),
+            (3, 1, "Hachlan Lunt")
     """
 
 

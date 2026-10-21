@@ -153,10 +153,17 @@ def join():
         if not move:
             flash(f"Incorrect code", "error")
             return redirect("/")
+        
+        name = request.form.get('name','')
+        if not name:
+            # user is already logged in
+            sql = """
+                INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
+            """ # HEY FINISH THIS PART PLEASE :DDD
+            params = (user["id"], move["id"], user["name"])
         sql = """
             SELECT * FROM users WHERE name=?
         """
-        name = request.form.get('name','')
         params = (name,)
         user = db.execute(sql,params).fetchone()
         if not user:
@@ -188,11 +195,11 @@ def join():
             sql="""
                 SELECT * FROM helpers WHERE user_id=? AND move_id=?
             """
-            params = (user_id, move_id)
+            params = (user_id, move_id, name)
             result = db.execute(sql,params)
             if not result:
                 sql="""
-                    INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
+                    INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
                 """
                 db.execute(sql, params)
                 session["logged_in"] = True
@@ -202,6 +209,11 @@ def join():
                 }
                 return redirect(f"/move/{move_id}")
             else:
+                session["logged_in"] = True
+                session["user"] = {
+                "id":       user["id"],
+                "name": user["name"]
+                }
                 return redirect(f"/move/{move_id}")
             
             
@@ -221,28 +233,35 @@ def move(id):
         """
         params = (id,)
         move = db.execute(sql, params).fetchone()
-        sql = """
-            SELECT * FROM helpers WHERE move_id=?
-        """
+
         sql = """
             SELECT * FROM boxes WHERE move_id=?
         """
         boxes = db.execute(sql, params).fetchall()
-        params =(move["id"],)
-        helpers = db.execute(sql,params).fetchall()
+        sql = """
+            SELECT * FROM helpers WHERE move_id=?
+        """
+        helpers = db.execute(sql,params)
         move_owner = move["user_id"]
         if session.get("user"):
             current_user = session.get("user").get("id")
 
             if move_owner != current_user:
-                for helper in helpers:
-                    if helper["user_id"] != current_user:
-                        flash("You don't have access to that move", "error")
-                        return redirect("/")
+                sql = """
+                    SELECT * FROM helpers WHERE move_id=? AND user_id=?
+                """
+                params =(id,current_user)
+                helper = db.execute(sql,params).fetchone()
+                if not helper:   
+                    flash(f"you dont have access to that move", "error")
+                    return redirect("/")
+                else:
+                    return render_template(f"pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner, helpers=helpers)
+            else:
+                return render_template(f"pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner, helpers=helpers)
         else:
-            return render_template("pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner)
-
-        return render_template("pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner)
+            flash(f"you dont have access to that move", "error")
+            return redirect("/")
 
 #-----------------------------------------------------------
 # Generate new code
