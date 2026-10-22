@@ -69,7 +69,7 @@
                 <button>Add new box</button>
             </form>
             
-            {% if session.logged_in and session.user.id == move_owner %}
+            {% if session.logged_in and session.user_id == move_owner %}
                 {% for helper in helpers %}
                     {{ helper.user_name }} <a href="/remove_helper">Remove this helper?</a>
                 {% endfor %}
