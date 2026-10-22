@@ -160,8 +160,8 @@ def join():
             sql = """
                 INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
             """ # HEY FINISH THIS PART PLEASE :DDD
-            params = (user["id"], move["id"], user["name"])
-            db.execute(db,params)
+            params = (session["user"]["id"], move["id"], session["user"]["name"])
+            db.execute(sql,params)
             return redirect(f"/move/{move_id}")
         sql = """
             SELECT * FROM users WHERE name=?
