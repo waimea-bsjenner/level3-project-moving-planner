@@ -138,6 +138,16 @@ def logout_user():
     flash(f"You have been logged out", "success")
     return redirect("/")
 
+
+def becomeHelper(db, move_id, user_id):
+    sql = """
+        INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
+    """
+    params = (user_id, move_id, "")
+    db.execute(sql,params)
+        
+    
+
 #-----------------------------------------------------------
 # Joining a move route
 #-----------------------------------------------------------
@@ -155,19 +165,24 @@ def join():
             return redirect("/")
         
         name = request.form.get('name','')
-        if not name:
-            # user is already logged in
-            sql = """
-                INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
-            """ # HEY FINISH THIS PART PLEASE :DDD
-            params = (session["user"]["id"], move["id"], session["user"]["name"])
-            db.execute(sql,params)
+        move_id = move["id"]
+
+        # Check if user is logged in
+        if not name or session.get("logged_in"):
+            # user is already logged in, so just add them to the move as a helper
+
+            # HEY UH MAKE SURE TO CHECK IF THEY ARE ALREADY A HELPER BEFORE ADDING THEM AS A HELPER YAYYYY
+
+            becomeHelper(db, session["user"]["id"], move_id)
             return redirect(f"/move/{move_id}")
+        
+        # User was not logged in, so check for existing account
         sql = """
             SELECT * FROM users WHERE name=?
         """
         params = (name,)
         user = db.execute(sql,params).fetchone()
+
         if not user:
             # New user - need to add them
             sql = """
@@ -175,12 +190,24 @@ def join():
             """
             pass_hash = generate_password_hash(html.escape(request.form.get('password','').strip()))
             params = (name, pass_hash)
-            db.execute(sql,params)
-            sql = """
-                SELECT id FROM users WHERE name=?
-            """
-            params = (name,)
-            user_id = db.execute(sql,params).fetchone()
+            result = db.execute(sql,params)
+
+            user_id = result.lastrowid  
+            becomeHelper(db, user_id, move_id)
+
+            session["logged_in"] = True
+            session["user"] = {
+                "id":   user_id,
+                "name": name
+            }
+            
+            flash("You now have an account and have joined the move!", "success")
+            return redirect(f"/move/{move_id}") 
+            # sql = """
+            #     SELECT id FROM users WHERE name=?
+            # """
+            # params = (name,)
+            # user_id = db.execute(sql,params).fetchone()
             
         else:
             # existing user - check pass
@@ -192,14 +219,18 @@ def join():
                 return redirect("/")
             
             user_id = user["id"]
-            move_id = move["id"]
-
+            becomeHelper(db, user_id, move_id)
+            return redirect(f"/move/{move_id}")
+        
             sql="""
-                SELECT * FROM helpers WHERE user_id=? AND move_id=?
+                SELECT user_name FROM helpers WHERE user_id=? AND move_id=?
             """
-            params = (user_id, move_id, name)
-            result = db.execute(sql,params)
+            params = (user_id, move_id)
+            result = db.execute(sql,params).fetchone()
+            print(result["user_name"])
             if not result:
+                print("bro is not a helper")
+                params = (user_id, move_id, name)
                 sql="""
                     INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
                 """
@@ -211,6 +242,7 @@ def join():
                 }
                 return redirect(f"/move/{move_id}")
             else:
+                print("bro is a helper")
                 session["logged_in"] = True
                 session["user"] = {
                 "id":       user["id"],
@@ -228,6 +260,7 @@ def join():
 # Move page
 #-----------------------------------------------------------
 @app.get("/move/<int:id>")
+@login_required
 def move(id):
     with connect_db() as db:
         sql = """
@@ -243,27 +276,23 @@ def move(id):
         sql = """
             SELECT * FROM helpers WHERE move_id=?
         """
-        helpers = db.execute(sql,params)
+        helpers = db.execute(sql,params).fetchall()
         move_owner = move["user_id"]
-        if session.get("user"):
-            current_user = session.get("user").get("id")
+        current_user = session.get("user").get("id")
 
-            if move_owner != current_user:
-                sql = """
-                    SELECT * FROM helpers WHERE move_id=? AND user_id=?
-                """
-                params =(id,current_user)
-                helper = db.execute(sql,params).fetchone()
-                if not helper:   
-                    flash(f"you dont have access to that move", "error")
-                    return redirect("/")
-                else:
-                    return render_template(f"pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner, helpers=helpers)
+        if move_owner != current_user:
+            sql = """
+                SELECT * FROM helpers WHERE move_id=? AND user_id=?
+            """
+            params =(id,current_user)
+            helper = db.execute(sql,params).fetchone()
+            if not helper:
+                flash(f"you dont have access to that move", "error")
+                return redirect("/")
             else:
                 return render_template(f"pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner, helpers=helpers)
         else:
-            flash(f"you dont have access to that move", "error")
-            return redirect("/")
+            return render_template(f"pages/move.jinja", move=move, boxes=boxes, move_owner=move_owner, helpers=helpers)
 
 #-----------------------------------------------------------
 # Generate new code

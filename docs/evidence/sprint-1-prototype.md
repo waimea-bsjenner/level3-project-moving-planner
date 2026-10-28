@@ -29,6 +29,10 @@ To start with the database, I made a design in DrawSQL. This has 4 tables, items
 
 ![DB Design](screenshots/dbDesignV1.png)
 
+I later updated this DB to have a helpers table with n-1 connections to users and moves
+
+![DB Design but with helper table](screenshots/dbDesignV2.png)
+
 
 ### Required Data Input
 
