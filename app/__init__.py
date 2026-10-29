@@ -140,11 +140,17 @@ def logout_user():
 
 
 def becomeHelper(db, move_id, user_id):
+
     sql = """
-        INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
+        SELECT * FROM helper WHERE user_id=? AND move_id=?
     """
-    params = (user_id, move_id, "")
-    db.execute(sql,params)
+    params = (user_id, move_id)
+    result = db.execute(sql,params)
+    if not result:
+        sql = """
+            INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
+        """
+        db.execute(sql,params)
         
     
 
@@ -170,9 +176,6 @@ def join():
         # Check if user is logged in
         if not name or session.get("logged_in"):
             # user is already logged in, so just add them to the move as a helper
-
-            # HEY UH MAKE SURE TO CHECK IF THEY ARE ALREADY A HELPER BEFORE ADDING THEM AS A HELPER YAYYYY
-
             becomeHelper(db, session["user"]["id"], move_id)
             return redirect(f"/move/{move_id}")
         
@@ -203,11 +206,6 @@ def join():
             
             flash("You now have an account and have joined the move!", "success")
             return redirect(f"/move/{move_id}") 
-            # sql = """
-            #     SELECT id FROM users WHERE name=?
-            # """
-            # params = (name,)
-            # user_id = db.execute(sql,params).fetchone()
             
         else:
             # existing user - check pass
@@ -220,40 +218,7 @@ def join():
             
             user_id = user["id"]
             becomeHelper(db, user_id, move_id)
-            return redirect(f"/move/{move_id}")
-        
-            sql="""
-                SELECT user_name FROM helpers WHERE user_id=? AND move_id=?
-            """
-            params = (user_id, move_id)
-            result = db.execute(sql,params).fetchone()
-            print(result["user_name"])
-            if not result:
-                print("bro is not a helper")
-                params = (user_id, move_id, name)
-                sql="""
-                    INSERT INTO helpers (user_id, move_id, user_name) VALUES (?, ?, ?)
-                """
-                db.execute(sql, params)
-                session["logged_in"] = True
-                session["user"] = {
-                "id":       user["id"],
-                "name": user["name"]
-                }
-                return redirect(f"/move/{move_id}")
-            else:
-                print("bro is a helper")
-                session["logged_in"] = True
-                session["user"] = {
-                "id":       user["id"],
-                "name": user["name"]
-                }
-                return redirect(f"/move/{move_id}")
-            
-            
-        # TODO
-        # login user - session
-        # Add them to the helpers table - move id and user_id
+            return redirect(f"/move/{move_id}") 
 
 
 #-----------------------------------------------------------    
