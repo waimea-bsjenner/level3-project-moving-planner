@@ -139,18 +139,21 @@ def logout_user():
     return redirect("/")
 
 
-def becomeHelper(db, move_id, user_id):
+def becomeHelper(db, user_id, move_id):
 
     sql = """
-        SELECT * FROM helper WHERE user_id=? AND move_id=?
+        SELECT * FROM helpers WHERE user_id=? AND move_id=?
     """
     params = (user_id, move_id)
-    result = db.execute(sql,params)
+    result = db.execute(sql,params).fetchone()
     if not result:
+        print("not result yarghhh")
         sql = """
             INSERT INTO helpers (user_id, move_id) VALUES (?, ?)
         """
         db.execute(sql,params)
+    else:
+        print(f"{result["user_id"]} {result["move_id"]} AAAAAAAAAAAAAAAAAAAAAA")
         
     
 
@@ -218,6 +221,11 @@ def join():
             
             user_id = user["id"]
             becomeHelper(db, user_id, move_id)
+            session["logged_in"] = True
+            session["user"] = {
+                "id":   user_id,
+                "name": name
+            }
             return redirect(f"/move/{move_id}") 
 
 
@@ -242,9 +250,11 @@ def move(id):
             SELECT * FROM helpers WHERE move_id=?
         """
         helpers = db.execute(sql,params).fetchall()
+        sql = """
+            SELECT name FROM users WHERE id=? # FINISHHH THIS PART RAHHHHH WE FINALLY GOT JOIN WORKING
+        """ 
         move_owner = move["user_id"]
         current_user = session.get("user").get("id")
-
         if move_owner != current_user:
             sql = """
                 SELECT * FROM helpers WHERE move_id=? AND user_id=?
