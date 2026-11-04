@@ -227,6 +227,20 @@ def join():
                 "name": name
             }
             return redirect(f"/move/{move_id}") 
+        
+#-----------------------------------------------------------
+# remove helper route
+#-----------------------------------------------------------
+@app.get("/remove_helper/<int:move_id>/<int:user_id>")
+def remove_helper(move_id, user_id):
+    with connect_db() as db:
+        sql = """
+            DELETE FROM helpers WHERE move_id=? AND user_id=?
+        """
+        params=(move_id, user_id)
+        db.execute(sql,params)
+        return redirect(f"/move/{move_id}")
+
 
 
 #-----------------------------------------------------------    
@@ -247,11 +261,16 @@ def move(id):
         """
         boxes = db.execute(sql, params).fetchall()
         sql = """
-            SELECT * FROM helpers WHERE move_id=?
+            SELECT
+                users.name,
+                helpers.user_id 
+            FROM helpers 
+            JOIN users ON users.id = helpers.user_id
+            WHERE helpers.move_id=?
         """
         helpers = db.execute(sql,params).fetchall()
         sql = """
-            SELECT name FROM users WHERE id=? # FINISHHH THIS PART RAHHHHH WE FINALLY GOT JOIN WORKING
+            SELECT name FROM users WHERE id=?
         """ 
         move_owner = move["user_id"]
         current_user = session.get("user").get("id")

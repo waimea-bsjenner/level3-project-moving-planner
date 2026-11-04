@@ -70,7 +70,7 @@
             </form>
             {% if session.user.id == move_owner %}
                 {% for helper in helpers %}
-                    {{ helper.user_name }} <a href="/remove_helper">Remove this helper?</a>
+                    {{ helper.name }} <a href="/remove_helper/{{ move.id }}/{{ helper.user_id }}">Remove this helper?</a>
                 {% endfor %}
                <a href="/delete_move/{{ move.id }}">Delete move?</a>
             {% endif %}

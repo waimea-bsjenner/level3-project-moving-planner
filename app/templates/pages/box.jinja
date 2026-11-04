@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/messages.css">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/print.css" media="print">
+
 </head>
 
 <body>
@@ -45,11 +47,14 @@
 
             <a href="/move/{{ move.id }}">Back to {{ move.address }}</a>
 
-            <div>
+            <div id="box-contents">
                 {% for item in items %}
-                    <a href="/item/{{ item.id }}">{{ item.name }}</a>
+                    <a href="/item/{{ item.id }}" class="box-content">{{ item.name }}</a>
                 {% endfor %}
             </div>
+
+            <button onclick="window.print()">Print This Page</button>
+
 
             <form method="post" action="/new_item/{{ box.id }}">
                 <p>add another item:</p>

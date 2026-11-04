@@ -1,0 +1,23 @@
+/*===========================================================
+  Move Planner print stuff
+  By Benjamin Jenner
+===========================================================*/
+
+:not(a) {
+    display: none !important
+}
+
+main, .content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body {
+    color: #000;
+    background: #fff;
+}
+
+a {
+    color: #000
+}
