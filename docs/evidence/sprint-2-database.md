@@ -7,8 +7,6 @@ Implement the database, populated with test data. Create queries that retrieve t
 
 ### Specific Goals
 
-**Edit these goals as needed**
-
 - Implement the database
 - Add test data to the database
 - Create the following web pages:
@@ -23,8 +21,6 @@ Implement the database, populated with test data. Create queries that retrieve t
 ## Testing Displayment of YOUr data
 
 getting user-specfic data to show up on the screen, tested by looking at the screen
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
 
 ![gif showing user specific data for different users](screenshots/userSpecificData.gif)
 
@@ -65,7 +61,7 @@ first I had to design a way to get a code for a move so I added a field to the m
 
 ![the move code field in the config file](screenshots/moveCodeConfig.png)
 
-next I made a 
+next I made a route that creates
 ## Sprint Review
 
 Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.

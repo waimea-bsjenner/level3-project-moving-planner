@@ -3,14 +3,17 @@
   By Benjamin Jenner
 ===========================================================*/
 
-:not(a) {
-    display: none !important
+p, label, button {
+    display: none;
+}
+
+a:not(.box-content) {
+    display: none;
 }
 
 main, .content {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    max-width: 60rem;
+    padding: 1rem;
 }
 
 body {
@@ -19,5 +22,6 @@ body {
 }
 
 a {
-    color: #000
+    color: #000;
+    display: list-item;
 }

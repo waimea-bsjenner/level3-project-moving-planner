@@ -17,7 +17,7 @@ Continue to develop the web application to the point that it provides all key fu
     - Etc.
 
 
-## Testing FEATURE NAME HERE
+## Testing Printability
 
 Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
 

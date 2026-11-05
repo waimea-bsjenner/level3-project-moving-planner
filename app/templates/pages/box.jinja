@@ -33,7 +33,7 @@
         {% else %}
             <a href="/">Home</a>
             <a href="/signup_form">Sign up</a>
-            <a href="/login_form">Login</a>
+            <a href="/login_form">Log in</a>
         {% endif %}
     </header>
 
@@ -47,9 +47,9 @@
 
             <a href="/move/{{ move.id }}">Back to {{ move.address }}</a>
 
-            <div id="box-contents">
+            <div id="boxcontents">
                 {% for item in items %}
-                    <a href="/item/{{ item.id }}" class="box-content">{{ item.name }}</a>
+                    <a href="/item/{{ item.id }}" class="box-content">{{item.count}}x {{ item.name }}</a>
                 {% endfor %}
             </div>
 

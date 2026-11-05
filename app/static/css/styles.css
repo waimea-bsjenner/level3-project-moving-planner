@@ -4,14 +4,14 @@
 ===========================================================*/
 
 :root {
-    --text-col:         #101010;
+    --text-col:         #adffda;
 
-    --back-col:         #fff;
-    --back-col-panel:   #fff;
+    --back-col:         #0b2415;
+    --back-col-panel:   #072f24;
 
-    --border-col:       #355;
+    --border-col:       #0d4d3b;
 
-    --accent-col:       #e43;
+    --accent-col:       #00ffb2;
 }
 
 
@@ -36,6 +36,19 @@ main {
     padding: 1rem;
 }
 
+a {
+    color: var(--accent-col);
+}
+
+h1 {
+    align-items: center;
+}
+
+.list-box {
+    border-radius: 3%;
+    background-color: var(--back-col-pane);
+}
+
 
 /* Header & Nav -----------------------------------------------*/
 
@@ -44,6 +57,7 @@ body > header {
     gap: 1rem;
     align-items: center;
     padding: 1rem;
+    background-color: var(--back-col-panel);
 
     nav {
         display: flex;
