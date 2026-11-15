@@ -6,6 +6,12 @@
 
 During development of the website to ensure it was completely functional I went through every possible situation that a user could have and made it so that the website worked and didn't fall apart. A good example of this is the join route, as there are many scenarios a user could have. For example, a user could be logged in, not logged in and have an account, or not logged in and not have an account, and I ensured and tested (though i didn't manage to document it I dont think) that each one works as intended. unfortunately I wasn't able to meet my second specific requirement because it is outside of the websites control. I'm not very good at this website thing :>
 
+![code showing if the user is already signed in](screenshots/alreadyLoggedIn.png)
+
+![code showing if the user isn't signed in and doesnt have an account](screenshots/newUser.png)
+
+![code showing if the user isn't signed in and does have an account](screenshots/unSignedInUser.png)
+
 
 ### Usability
 
@@ -21,17 +27,16 @@ Accessibility is also apart of the front end of website development, and to addr
 
 Privacy was addressed by limiting the access of other users to each other at the owners discretion. The helper system allows for other people to access anothers move and make changes to it, however if the owner no longer wishes for someone to help out, then they have the ability to remove that person from the move. To keep any removed helpers from rejoining the move, I also added a system to change the code of the move, so then the original code would no longer work. Also to keep people's data safe, I stored a hash of their password instead of their password in plain text to prevent data leakages.
 
+![the route of removing a helper](screenshots/removeHelperRoute.png)
 
 ### Future Proofing
 
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+Future proofing is about making the website easy to make changes to and modify in the future. This is important to my web app as moving from house to house often takes place between a few years or so. To make this possible I made the stylesheet use variables to easily modify the colour palette. I also would've liked to have make the pages modular, with the use of divs, but i didn't get around to that.
+
+![colour variables in the css](screenshots/colourVariables.png)
 
 
 ## Overall Review
 
-Replace these words with a brief review of how the project went in terms of:
-- What went well?
-- What didn't go so well?
-- How did the testing/trialling impact the final system?
-- What would you do differently if you could?
+Overall, development was going well, but I struggled to complete the project within the generously large timeframe given by my wonderful DTD teacher. I particularly had problems with understanding what exactly everything did, as I am the type of person who likes to understand how something works before I can get proficient with it. I also struggled with css, as it doesn't give any errors, since the way a website looks is purely subjective, so I would've had to spend a lot of time just unproductively messing around with margins, and padding and what not as I struggle to remember any css from last year. If I could've done anything differently, I would've commented my code more as I go, because a solid amount of time wasted was just trying to understand what yesterday Benjamin was creating. Something that went well was my understanding of how the backend part of the website worked, as I made a point to copy minimal code and write most of it myself, and after spending a ton of time getting things working, I would say I have a good understanding of how it all work, and that's worth more than any amount of credits (I'm coping).
 
